@@ -4,7 +4,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import OtherPage from './OtherPage';
 import Fib from './Fib';
-
 class App extends Component {
   render() {
     return (
@@ -12,7 +11,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">FIB Calculator version 3</h1>
+            <h1 className="App-title">FIB Calculator version k </h1>
             <Link to="/">Home</Link>
             <Link to="/otherpage">Other Page</Link>
           </header>
@@ -25,5 +24,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
