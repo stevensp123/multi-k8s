@@ -1,0 +1,33 @@
+sudo: required
+services:
+  - docker
+  
+before_install:
+  - curl https://sdk.cloud.google.com | bash > /dev/null;
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update kubectl
+  - gcloud auth activate-service-account --key-file service-account.json
+
+
+-------------------
+
+
+
+
+  - docker build -t stevensp123/docker-react -f Dockerfile.dev .
+  
+script:
+  - docker run stevensp123/docker-react npm run test -- --coverage
+  
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-178380328131"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
